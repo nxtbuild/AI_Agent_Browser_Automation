@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@openai/agents": "^0.0.17",
+    "dotenv": "^17.2.1",
+    "fs": "^0.0.1-security",
+    "openai": "^5.15.0",
+    "openai-agents": "^1.1.0",
+    "path": "^0.12.7",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.0"
+  },
+  "scripts": {}
+}
