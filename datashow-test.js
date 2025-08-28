@@ -15,37 +15,40 @@ import { chromium } from "playwright";
 
   page.on("dialog", async (dialog) => {
     console.log("Dialog message:", dialog.message());
-    await new Promise((r) => setTimeout(r, 5000));
+    await new Promise((r) => setTimeout(r, 3000));
     await dialog.accept();
   });
 
   // Navigate directly to the signup page
-  await page.goto("https://ui.chaicode.com/auth/signup");
-  await page.waitForSelector("#firstName", { timeout: 10000 });
+  await page.goto("https://nextbuild.in/contact");
+
+  await page.waitForSelector("div.mil-section-title");
+
+  // Scroll to it
+  await page.locator("div.mil-section-title").last().scrollIntoViewIfNeeded();
 
   // Fill out the form
   const userData = {
-    firstName: "Santosh",
-    lastName: "Vishwakarma",
+    name: "Santosh",
+    mobileNo: "9988776655",
     email: "santosh@gmail.com",
-    password: "sde00918#$",
+    description: "I need a custom software. can you schedule meeting with me.",
   };
-  await page.fill("#firstName", userData.firstName);
-  await page.fill("#lastName", userData.lastName);
-  await page.fill("#email", userData.email);
-  await page.fill("#password", userData.password);
-  await page.fill("#confirmPassword", userData.password);
+  await page.fill('[name="name"]', userData.name);
+  await page.fill('[name="mobileNo"]', userData.mobileNo);
+  await page.fill('[name="email"]', userData.email);
+  await page.fill('textarea[name="description"]', userData.description);
 
   // Submit the form
   await page.click('button[type="submit"]');
 
   // Use the preserved native alert to show the values
-  await page.evaluate(({ firstName, lastName, email, password }) => {
+  await page.evaluate(({ name, mobileNo, email, description }) => {
     const msg =
-      `FirstName: ${firstName}\n` +
-      `LastName: ${lastName}\n` +
+      `Name: ${name}\n` +
+      `MobileNo: ${mobileNo}\n` +
       `Email: ${email}\n` +
-      `Password: ${password}`;
+      `Message: ${description}`;
 
     if (typeof window.__nativeAlert === "function") {
       window.__nativeAlert(msg);
