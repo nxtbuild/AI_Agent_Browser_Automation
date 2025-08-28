@@ -32,7 +32,7 @@ import { chromium } from "playwright";
     name: "Santosh",
     mobileNo: "9988776655",
     email: "santosh@gmail.com",
-    description: "I need a custom software. can you schedule meeting with me.",
+    description: "Hello, this is a test automation message",
   };
   await page.fill('[name="name"]', userData.name);
   await page.fill('[name="mobileNo"]', userData.mobileNo);
